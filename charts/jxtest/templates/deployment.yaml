@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}
@@ -23,6 +23,7 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.service.internalPort }}
+        args: ["--server"]
         livenessProbe:
           httpGet:
             path: {{ .Values.probePath }}
