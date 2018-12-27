@@ -1,0 +1,7 @@
+jetty:
+ connectors:
+   - type: http
+     port: 80
+ context: /jxtest
+ minThreads: 2
+ maxThreads: 40
