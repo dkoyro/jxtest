@@ -16,10 +16,7 @@ pipeline {
         HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
       }
       steps {
-       withMaven(
-              maven: 'M3',
-              mavenSettingsConfig: 'my-maven-settings',
-              mavenLocalRepo: '.repository') {
+       withMaven(maven: 'M3') {
         sh "mvn versions:set -DnewVersion=$PREVIEW_VERSION"
         sh "mvn install"
         }
