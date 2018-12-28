@@ -16,7 +16,7 @@ public class TestResource {
 	@GET
 	public String get() throws UnknownHostException {
 		InetAddress address = InetAddress.getLocalHost();
-		StringBuilder result = new StringBuilder();
+		StringBuilder result = new StringBuilder("Hello World!<br>");
 		result.append("Host: ").append(address.getHostName()).append("<br>");
 		headers.getRequestHeaders().forEach((k, v) -> result.append(k).append(" = ").append(v).append("<br>"));
 		return result.toString();
