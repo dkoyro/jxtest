@@ -1,5 +1,7 @@
 pipeline {
-  agent any
+  agent {
+    label "jenkins-maven"
+  }
   environment {
     ORG = 'dkoyro'
     APP_NAME = 'jxtest'
@@ -16,13 +18,15 @@ pipeline {
         HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
       }
       steps {
-        sh "mvn versions:set -DnewVersion=$PREVIEW_VERSION"
-        sh "mvn install"
-        sh "export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml"
-        sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION"
-        dir('charts/preview') {
-          sh "make preview"
-          sh "jx preview --app $APP_NAME --dir ../.."
+      container('maven') {
+		sh "mvn versions:set -DnewVersion=$PREVIEW_VERSION"
+		sh "mvn install"
+		sh "export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml"
+		sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION"
+		 dir('charts/preview') {
+		  sh "make preview"
+		  sh "jx preview --app $APP_NAME --dir ../.."
+		 }
         }
       }
     }
