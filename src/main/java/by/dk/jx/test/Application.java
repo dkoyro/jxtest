@@ -1,5 +1,6 @@
 package by.dk.jx.test;
 
+import by.dk.jx.test.rest.HealthResource;
 import by.dk.jx.test.rest.TestResource;
 import com.google.inject.Binder;
 import io.bootique.BQCoreModule;
@@ -21,6 +22,8 @@ public class Application extends ConfigModule {
 	@Override
 	public void configure(Binder binder) {
 		BQCoreModule.extend(binder).addConfig("classpath:by/dk/jx/test/config.yml");
-		JerseyModule.extend(binder).addResource(TestResource.class);
+		JerseyModule.extend(binder)
+				.addResource(TestResource.class)
+				.addResource(HealthResource.class);
 	}
 }
