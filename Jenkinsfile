@@ -35,9 +35,9 @@ pipeline {
         branch 'master'
       }
       steps {
-      container('maven') {
 	    git 'https://github.com/dkoyro/jxtest.git'
 
+      container('maven') {
          // so we can retrieve the version in later steps
          sh "echo \$(jx-release-version) > VERSION"
          sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
