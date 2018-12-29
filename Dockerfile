@@ -12,5 +12,5 @@ ADD pom.xml target/lib* /opt/lib/
 # we could do with a better way to know the name - or to always create an app.jar or something
 WORKDIR /opt
 #COPY target/*.jar /opt/jxtest.jar
-ADD target/*.jar /opt/jxtest.jar
+ADD target/test*.jar /opt/jxtest.jar
 ENTRYPOINT ["java", "-jar", "jxtest.jar"]
