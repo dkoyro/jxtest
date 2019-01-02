@@ -6,7 +6,7 @@
 
 	<groupId>by.dk.jx.test</groupId>
 	<artifactId>test</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0.4</version>
 	<packaging>jar</packaging>
 	<properties>
 		<main.class>by.dk.jx.test.Application</main.class>
