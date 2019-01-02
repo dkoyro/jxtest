@@ -32,7 +32,9 @@ pipeline {
       }
     }
     stage('Build Release') {
-      agent any
+      agent {
+        label "jenkins-maven"
+      }
       when {
         branch 'master'
       }
