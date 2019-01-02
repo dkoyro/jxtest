@@ -48,7 +48,7 @@ pipeline {
         }
       }
     }
-    stage('Promote to Environments') {
+    stage('Promote to Stage environment') {
       when {
         branch 'master'
       }
