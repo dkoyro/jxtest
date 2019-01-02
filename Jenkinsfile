@@ -1,8 +1,5 @@
 pipeline {
-  agent any
-  // agent {
-  //  label "jenkins-maven"
-  // }
+  agent none
   environment {
     ORG = 'dkoyro'
     APP_NAME = 'jxtest'
@@ -10,6 +7,9 @@ pipeline {
   }
   stages {
     stage('CI Build and push snapshot') {
+      agent {
+        label "jenkins-maven"
+      }
       when {
         branch 'PR-*'
       }
