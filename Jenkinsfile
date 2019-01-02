@@ -1,7 +1,5 @@
 pipeline {
-  agent {
-    label "jenkins-maven"
-  }
+  agent any
   environment {
     ORG = 'dkoyro'
     APP_NAME = 'jxtest'
