@@ -40,7 +40,6 @@ pipeline {
       }
       steps {
 	   git 'https://github.com/dkoyro/jxtest.git'
-		sh "jx step git credentials"
 
 		// so we can retrieve the version in later steps
       container('maven') {
