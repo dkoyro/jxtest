@@ -32,6 +32,7 @@ pipeline {
       }
     }
     stage('Build Release') {
+      agent any
       when {
         branch 'master'
       }
@@ -48,6 +49,7 @@ pipeline {
       }
     }
     stage('Promote to Stage environment') {
+      agent any
       when {
         branch 'master'
       }
