@@ -32,9 +32,10 @@ pipeline {
       }
     }
     stage('Build Release') {
-      agent {
-        label "jenkins-maven"
-      }
+		agent any
+//      agent {
+//        label "jenkins-maven"
+//      }
       when {
         branch 'master'
       }
@@ -42,7 +43,7 @@ pipeline {
 	   git 'https://github.com/dkoyro/jxtest.git'
 
 		// so we can retrieve the version in later steps
-      container('maven') {
+      // container('maven') {
 		sh "echo \$(jx-release-version) > VERSION"
 		sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
 		sh "jx step git credentials"
@@ -51,7 +52,7 @@ pipeline {
 		sh "mvn clean deploy"
 		sh "export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml"
         sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
-        }
+//        }
       }
     }
     stage('Promote to Stage environment') {
