@@ -32,25 +32,24 @@ pipeline {
       }
     }
     stage('Build Release') {
-      agent {
-        label "jenkins"
-      }
       when {
         branch 'master'
       }
       steps {
-	   git 'https://github.com/dkoyro/jxtest.git'
+	    // git 'https://github.com/dkoyro/jxtest.git'
 
-		// so we can retrieve the version in later steps
-       container('maven') {
-		sh "echo \$(jx-release-version) > VERSION"
-		sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
-		}
+	   container('maven') {
+		// ensure we're not on a detached head
+        sh "git checkout master"
+        sh "git config --global credential.helper store"
 
 		sh "jx step git credentials"
-        sh "jx step tag --version \$(cat VERSION)"
-        
-	   container('maven') {
+		// so we can retrieve the version in later steps
+		sh "echo \$(jx-release-version) > VERSION"
+		sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
+	    sh "make tag"
+        // sh "jx step tag --version \$(cat VERSION)"
+
 		sh "mvn clean deploy"
 		sh "export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml"
         sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
