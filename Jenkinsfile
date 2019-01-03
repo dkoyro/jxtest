@@ -1,5 +1,7 @@
 pipeline {
-  agent none
+  agent {
+	label "jenkins-maven"
+  }
   environment {
     ORG = 'dkoyro'
     APP_NAME = 'jxtest'
@@ -7,9 +9,6 @@ pipeline {
   }
   stages {
     stage('CI Build and push snapshot') {
-      agent {
-        label "jenkins-maven"
-      }
       when {
         branch 'PR-*'
       }
@@ -56,8 +55,7 @@ pipeline {
         }
       }
     }
-    stage('Promote to Stage environment') {
-      agent any
+    stage('Promote to Environments') {
       when {
         branch 'master'
       }
