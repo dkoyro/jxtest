@@ -2,6 +2,8 @@ package by.dk.jx.test;
 
 import by.dk.jx.test.rest.HealthResource;
 import by.dk.jx.test.rest.TestResource;
+import by.dk.jx.test.services.IManifestService;
+import by.dk.jx.test.services.ManifestService;
 import com.google.inject.Binder;
 import io.bootique.BQCoreModule;
 import io.bootique.Bootique;
@@ -25,5 +27,7 @@ public class Application extends ConfigModule {
 		JerseyModule.extend(binder)
 				.addResource(TestResource.class)
 				.addResource(HealthResource.class);
+
+		binder.bind(IManifestService.class).to(ManifestService.class).asEagerSingleton();
 	}
 }

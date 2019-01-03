@@ -1,23 +1,31 @@
 package by.dk.jx.test.rest;
 
 
+import by.dk.jx.test.services.IManifestService;
+import com.google.inject.Inject;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
 import java.net.UnknownHostException;
+
+import static by.dk.jx.test.services.IManifestService.BUILT_BY;
+import static by.dk.jx.test.services.IManifestService.CREATED_BY;
+import static by.dk.jx.test.services.IManifestService.IMPLEMENTATION_TITLE;
+import static by.dk.jx.test.services.IManifestService.IMPLEMENTATION_VENDOR_ID;
+import static by.dk.jx.test.services.IManifestService.IMPLEMENTATION_VERSION;
 
 @Path("/")
 public class TestResource {
-	@Context
-	private HttpHeaders headers;
+	@Inject private IManifestService manifestService;
 
 	@GET
 	public String get() throws UnknownHostException {
 //		InetAddress address = InetAddress.getLocalHost();
-//		StringBuilder result = new StringBuilder();
-//		result.append("Host: ").append(address.getHostName()).append("<br>");
-//		headers.getRequestHeaders().forEach((k, v) -> result.append(k).append(" = ").append(v).append("<br>"));
-		return "Hello World!!!";
+
+		return IMPLEMENTATION_TITLE + manifestService.getImplementationTitle() + "<br>" +
+			   IMPLEMENTATION_VERSION + manifestService.getImplementationVersion() + "<br>" +
+			   IMPLEMENTATION_VENDOR_ID + manifestService.getImplementationVendorId() + "<br>" +
+			   BUILT_BY + manifestService.getBuiltBy() + "<br>" +
+			   CREATED_BY + manifestService.getCreatedBy() + "<br>";
 	}
 }
