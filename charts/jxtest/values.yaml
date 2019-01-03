@@ -4,7 +4,7 @@
 replicaCount: 1
 image:
   repository: draft
-  tag: 1.0.1
+  tag: dev
   pullPolicy: IfNotPresent
 service:
   name: jxtest
