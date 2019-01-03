@@ -1,7 +1,7 @@
 package by.dk.jx.test;
 
 import by.dk.jx.test.rest.HealthResource;
-import by.dk.jx.test.rest.TestResource;
+import by.dk.jx.test.rest.ManifestResource;
 import by.dk.jx.test.services.IManifestService;
 import by.dk.jx.test.services.ManifestService;
 import com.google.inject.Binder;
@@ -25,7 +25,7 @@ public class Application extends ConfigModule {
 	public void configure(Binder binder) {
 		BQCoreModule.extend(binder).addConfig("classpath:by/dk/jx/test/config.yml");
 		JerseyModule.extend(binder)
-				.addResource(TestResource.class)
+				.addResource(ManifestResource.class)
 				.addResource(HealthResource.class);
 
 		binder.bind(IManifestService.class).to(ManifestService.class).asEagerSingleton();

@@ -14,17 +14,15 @@ import static by.dk.jx.test.services.IManifestService.IMPLEMENTATION_VENDOR_ID;
 import static by.dk.jx.test.services.IManifestService.IMPLEMENTATION_VERSION;
 
 @Path("/")
-public class TestResource {
+public class ManifestResource {
 	@Inject private IManifestService manifestService;
 
 	@GET
 	public String get() {
-//		InetAddress address = InetAddress.getLocalHost();
-
-		return IMPLEMENTATION_TITLE + manifestService.getImplementationTitle() + "<br>" +
-			   IMPLEMENTATION_VERSION + manifestService.getImplementationVersion() + "<br>" +
-			   IMPLEMENTATION_VENDOR_ID + manifestService.getImplementationVendorId() + "<br>" +
-			   BUILT_BY + manifestService.getBuiltBy() + "<br>" +
-			   CREATED_BY + manifestService.getCreatedBy() + "<br>";
+		return IMPLEMENTATION_TITLE + " : " + manifestService.getImplementationTitle() + "<br>" +
+			   IMPLEMENTATION_VERSION + " : " + manifestService.getImplementationVersion() + "<br>" +
+			   IMPLEMENTATION_VENDOR_ID + " : " + manifestService.getImplementationVendorId() + "<br>" +
+			   BUILT_BY + " : " + manifestService.getBuiltBy() + "<br>" +
+			   CREATED_BY + " : " + manifestService.getCreatedBy() + "<br>";
 	}
 }
