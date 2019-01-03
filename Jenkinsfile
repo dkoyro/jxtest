@@ -46,6 +46,7 @@ pipeline {
 		sh "echo \$(jx-release-version) > VERSION"
 		sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
 		sh "jx step git credentials"
+		sh "ls -l /home/jenkins/git/credentials"
         sh "jx step tag --version \$(cat VERSION)"
 		sh "mvn clean deploy"
 		sh "export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml"
