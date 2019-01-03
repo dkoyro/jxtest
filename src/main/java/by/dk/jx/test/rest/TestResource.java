@@ -6,7 +6,6 @@ import com.google.inject.Inject;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import java.net.UnknownHostException;
 
 import static by.dk.jx.test.services.IManifestService.BUILT_BY;
 import static by.dk.jx.test.services.IManifestService.CREATED_BY;
@@ -19,7 +18,7 @@ public class TestResource {
 	@Inject private IManifestService manifestService;
 
 	@GET
-	public String get() throws UnknownHostException {
+	public String get() {
 //		InetAddress address = InetAddress.getLocalHost();
 
 		return IMPLEMENTATION_TITLE + manifestService.getImplementationTitle() + "<br>" +
