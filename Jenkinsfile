@@ -32,9 +32,7 @@ pipeline {
       }
     }
     stage('Build Release') {
-      agent {
-        label "jenkins-maven"
-      }
+      agent any
       when {
         branch 'master'
       }
@@ -45,9 +43,9 @@ pipeline {
        container('maven') {
 		sh "echo \$(jx-release-version) > VERSION"
 		sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
-		sh "jx step git credentials"
-		sh "cat /home/jenkins/git/credentials"
 		}
+
+		sh "jx step git credentials"
         sh "jx step tag --version \$(cat VERSION)"
         
 	   container('maven') {
