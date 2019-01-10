@@ -29,14 +29,14 @@ pipeline {
 			 }
 			}
       }
-	 post {
-		always {
-		   emailext body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
-		   to: "denis.koyro@gmail.com",
+// ToDo Jenkins emailExt plugin configuration
+//	 post {
+//		always {
+		   // emailext body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
 		   // recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
-		   subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
-		}
-	 }
+		   // subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
+//		}
+//	 }
 	}
     stage('Build Release') {
       when {
