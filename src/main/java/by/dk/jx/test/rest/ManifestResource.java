@@ -19,7 +19,7 @@ public class ManifestResource {
 
 	@GET
 	public String get() {
-		return IMPLEMENTATION_TITLE + " : " + manifestService.getImplementationTitle() + "<br>" +
+		return IMPLEMENTATION_TITLE + " : " + manifestService.getImplementationTitle() + " Hello <br>" +
 			   IMPLEMENTATION_VERSION + " : " + manifestService.getImplementationVersion() + "<br>" +
 			   IMPLEMENTATION_VENDOR_ID + " : " + manifestService.getImplementationVendorId() + "<br>" +
 			   BUILT_BY + " : " + manifestService.getBuiltBy() + "<br>" +
